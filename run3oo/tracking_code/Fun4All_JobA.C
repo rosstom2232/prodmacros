@@ -14,6 +14,15 @@
 #include <Trkr_RecoInit.C>
 #include <Trkr_TpcReadoutInit.C>
 
+#include <trackreco/DSTClusterPruning.h>
+
+#include <trackingqa/SiliconSeedsQA.h>
+#include <trackingqa/TpcSeedsQA.h>
+#include <trackingqa/TpcSiliconQA.h>
+
+#include <ffamodules/CDBInterface.h>
+#include <ffamodules/FlagHandler.h>
+
 #include <fun4all/Fun4AllDstInputManager.h>
 #include <fun4all/Fun4AllDstOutputManager.h>
 #include <fun4all/Fun4AllInputManager.h>
@@ -22,16 +31,7 @@
 #include <fun4all/Fun4AllServer.h>
 #include <fun4all/Fun4AllUtils.h>
 
-#include <ffamodules/CDBInterface.h>
-#include <ffamodules/FlagHandler.h>
-
 #include <phool/recoConsts.h>
-
-#include <trackreco/DSTClusterPruning.h>
-
-#include <trackingqa/SiliconSeedsQA.h>
-#include <trackingqa/TpcSeedsQA.h>
-#include <trackingqa/TpcSiliconQA.h>
 
 R__LOAD_LIBRARY(libfun4all.so)
 R__LOAD_LIBRARY(libffamodules.so)
