@@ -201,8 +201,7 @@ production_control.py --steer /path/to/autopilot.yaml
 Console output in cron jobs spams emails to whoever is at the receiving end (Chris), so in practice we need to redirect the output. It gets logged automatically anyway (the `-vv` flag increases verbosity to `DEBUG` level). The full line to be added to the crontabs (on at least those hosts that should run the production) is:
 ```bash
 # pro001 run3oo calo 
-15,55 * * * * source /sphenix/u/sphnxpro/mainkolja/sphenixprod/this_sphenixprod.sh >& /dev/null && production_control.py --steer 
-/sphenix/u/sphnxpro/Production2026/run3oo_calo_pro001/run3oo_calo_pro001/autopilot_run3oo_calo_physics_pro001_2025p009.yaml -vv  >& /dev/null
+15,55 * * * * source /sphenix/u/sphnxpro/Production2026/sphenixprod/this_sphenixprod.sh >& /dev/null && production_control.py --steer /sphenix/u/sphnxpro/Production2026/run3oo_calo_pro001/run3oo_calo_pro001/autopilot_run3oo_calo_physics_pro001_2025p009.yaml -vv  >& /dev/null
 ```
 To generate more complex `cron` time expressions, see [crontab.guru](https://crontab.guru/).
 
