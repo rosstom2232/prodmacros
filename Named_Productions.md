@@ -4,7 +4,7 @@
 - [Rules](#rules)
 - [Autopilot](#autopilot)
   - [Adapt or create rules](#adapt-or-create-rules)
-- [Add autopilot to the crontab(s)](#add-autopilot-to-the-crontabs)
+- [Add to the automated productions](#add-to-the-automated-productions)
 - [Update the branch and tag its tip](#update-the-branch-and-tag-its-tip)
 - [Appendix: Complete yaml files](#appendix-complete-yaml-files)
   - [Contents of `rules/run3oo_calo_physics_pro001_pcdb001_v001.yaml`](#contents-of-rulesrun3oo_calo_physics_pro001_pcdb001_v001yaml)
@@ -50,7 +50,7 @@ triggered_code
 
 Optional: We can delete unneeded directories, in this case tracking and streaming code. It makes sense to delete the branch's copy of this markdown file as well to avoid accidental spaghettification; production specific comments should go into a dedicated README file.
 ```bash
-git rm -rf tracking_code streaming_code Named_Productions.md
+git rm -rf tracking_code streaming_code Named_Productions.md active_productions.txt
 touch README_run3oo_calo_pro001_pcdb001_v001.md
 ```
 
@@ -75,7 +75,7 @@ calo_code/run_fitting.sh
 ### Sidebar: Comparing to main
 To compare a current file, use `git diff branch-name -- filename`. For example,
 ```diff
-git diff main:run3oo/triggered_code/Fun4All_Prdf_Combiner.C ./triggered_code/Fun4All_Prdf_Combiner.C
+git diff main:`run3oo/`triggered_code/Fun4All_Prdf_Combiner.C ./triggered_code/Fun4All_Prdf_Combiner.C
 diff --git a/run3oo/triggered_code/Fun4All_Prdf_Combiner.C b/dir_run3oo_calo_pro001_pcdb001_v001/triggered_code/Fun4All_Prdf_Combiner.C
 index ec93f7e..1a0f63e 100644
 --- a/run3oo/triggered_code/Fun4All_Prdf_Combiner.C
@@ -90,7 +90,11 @@ index ec93f7e..1a0f63e 100644
    se->VerbosityDownscale(100000);
 ```
 
-<!-- (To compare committed changes, you need to use `git diff branch1:path/to/file1 branch2:path/to/file2` instead) -->
+To compare committed changes, you need to use the following syntax instead:
+```bash
+git diff branch1:path/to/file1 branch2:path/to/file2
+````
+
 
 ## Rules
 Start from the appropriate template:
@@ -190,26 +194,27 @@ Now add an entry for each of the rules we want to run, ex.:
     submit: on
 [...]
 ```
+
 Instead of `runlist`, you can also specify a range with e.g. `runs: [79000 80000]`. The full file in the [Appendix](#appendix-complete-yaml-files) shows additional parameters to control the spider(s), monitoring, priority, etc. Also shown is how to run submission and/or spidering of the same job type from multiple submit hosts.
 
-## Add autopilot to the crontab(s)
-To run, a setup script has to be sourced and a python executable invoked with the location of the steering file. I.e., the abstract command for `cron` is
+## Add to the automated productions
+The autopilot is run with `production_control.py --steer /path/to/autopilot.yaml`. Instead of adding one such line to the `crontab` of all relevant submission hosts, a master script checks on a text file for all productions that should be run. You can double check that it is active on a given node, and which conterol file it is reading, with
 ```bash
-source /path/to/this_sphenixprod.sh
-production_control.py --steer /path/to/autopilot.yaml
+crontab -l
+05,35 * * * * /sphenix/u/sphnxpro/Production2026/sphenixprod/master_production_control.sh /sphenix/u/sphnxpro/Production2026/active_productions.txt 180 >& /dev/null 
 ```
-Console output in cron jobs spams emails to whoever is at the receiving end (Chris), so in practice we need to redirect the output. It gets logged automatically anyway (the `-vv` flag increases verbosity to `DEBUG` level). The full line to be added to the crontabs (on at least those hosts that should run the production) is:
-```bash
-# pro001 run3oo calo 
-15,55 * * * * source /sphenix/u/sphnxpro/Production2026/sphenixprod/this_sphenixprod.sh >& /dev/null && production_control.py --steer /sphenix/u/sphnxpro/Production2026/run3oo_calo_pro001/run3oo_calo_pro001/autopilot_run3oo_calo_physics_pro001_2025p009.yaml -vv  >& /dev/null
-```
-To generate more complex `cron` time expressions, see [crontab.guru](https://crontab.guru/).
+The `180` is the time interval in seconds between invocations of each line in the list.
+(To generate more complex `cron` time expressions, see [crontab.guru](https://crontab.guru/)).
 
-The proper way to edit crontabs is to edit the version controlled (and soft-linked) named file in `sphnxpro`'s home directory, then call the `crontab` command with the file as an argument **on the proper host**.
+To add this production to the list, edit `/sphenix/u/sphnxpro/Production2026/active_productions.txt` which is symlinked to the `prodmacros` repo in the same directory. Important: We should have deleted the local copy of this file early on, but either way, make sure you edit the correct global one. It should look something like:
 ```bash
-sphnxpro@sphnxprod02 ~> emacs crontab.sphnxprod02
-sphnxpro@sphnxprod02 ~> crontab crontab.sphnxprod02
+cat /sphenix/u/sphnxpro/Production2026/active_productions.txt
+# This file lists the active production steering files for the master cron job.
+# One full path per line. Lines starting with # are ignored.
+/sphenix/u/sphnxpro/Production2026/run3oo_calo_pro001_pcdb001_v001/dir_run3oo_calo_pro001_pcdb001_v001/pilots/autopilot_run3oo_calo_physics_pro001_pcdb001_v001.yaml
+...
 ```
+
 
 ## Update the branch and tag its tip
 To preserve what we're doing, now commit all changes and create a tag. 
@@ -229,6 +234,15 @@ git tag -a tag_run3oo_calo_pro001_pcdb001_v001 -m "Setup for calo production usi
 git push --follow-tags
 ```
 
+If you need to make corrections later, create and tag a new tag by appending `_fixN`. Ex.:
+```
+git tag -a tag_run3oo_calo_pro001_pcdb001_v001_fix1 -m "Added ZDC fix"
+git push --follow-tags
+```
+
+<!-- ############################################################################### -->
+<!-- ############################################################################### -->
+<!-- ############################################################################### -->
 
 
 ## Appendix: Complete yaml files
@@ -326,7 +340,4 @@ sphnxprod02:
 
 ###############################################################################
 ```
-
-
-
 
