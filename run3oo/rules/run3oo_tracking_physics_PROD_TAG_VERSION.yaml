@@ -51,7 +51,7 @@ Full_TRKR_CLUSTER_run3oo:
     log:                   '{condor}/{logbase}.condor'
     neventsper:             1000
     payload:                [../tracking_code/*]
-    request_memory:         8192 MB, 1292 MB, 1692 MB 
+    request_memory:         8192 MB, 12092 MB, 16092 MB 
     request_cpus:          '1'
     batch_name:            '{rule_name}_{dataset}_{outtriplet}'
     priority:              '60'
