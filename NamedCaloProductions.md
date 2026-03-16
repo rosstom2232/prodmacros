@@ -22,6 +22,9 @@ cd run3oo_calo_pro001_pcdb001_v001
 Start by checking out a new branch, with a slightly different name to not confuse git.
 Then make a copy of the appropriate directory, again slightly differently named.
 ```bash
+git checkout -b branch_run3oo_calo_pro001_pcdb001_v001
+git branch --show-current
+branch_run3oo_calo_pro001_pcdb001_v001
 cp -r run3oo dir_run3oo_calo_pro001_pcdb001_v001
 git add dir_run3oo_calo_pro001_pcdb001_v001
 ```
