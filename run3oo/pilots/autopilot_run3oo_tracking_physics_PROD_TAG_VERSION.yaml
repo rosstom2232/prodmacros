@@ -8,7 +8,7 @@ sphnxprod01:
     configbase: /sphenix/u/sphnxpro/Production2026/BRANCH/dir_BRANCH
 
   # STREAMING physics
-  Full_STREAMING_EVENT_run3oo:
+  PROD_STREAMING_EVENT_run3oo:
     config: run3oo_tracking_physics_PROD_TAG_VERSION.yaml
     runlist: /sphenix/u/sphnxpro/Production2026/BRANCH/dir_BRANCH/runlist
     #runs: [82372 82703]
@@ -18,7 +18,7 @@ sphnxprod01:
     finishmon: on
 
   # TRKR_CLUSTER physics
-  Full_TRKR_CLUSTER_run3oo:
+  PROD_TRKR_CLUSTER_run3oo:
     config: run3oo_tracking_physics_PROD_TAG_VERSION.yaml
     runlist: /sphenix/u/sphnxpro/Production2026/BRANCH/dir_BRANCH/runlist
     #runs: [82372 82703]
@@ -28,7 +28,7 @@ sphnxprod01:
     finishmon: on
 
   # TRKR_SEED physics
-  Full_TRKR_SEED_run3oo:
+  PROD_TRKR_SEED_run3oo:
     config: run3oo_tracking_physics_PROD_TAG_VERSION.yaml
     runlist: /sphenix/u/sphnxpro/Production2026/BRANCH/dir_BRANCH/runlist
     #runs: [82372 82703]
@@ -38,7 +38,7 @@ sphnxprod01:
     finishmon: on
 
   # TRKR_TRACKS physics
-  Full_TRKR_TRACKS_run3oo:
+  PROD_TRKR_TRACKS_run3oo:
     config: run3oo_tracking_physics_PROD_TAG_VERSION.yaml
     runlist: /sphenix/u/sphnxpro/Production2026/BRANCH/dir_BRANCH/runlist
     #runs: [82372 82703]
