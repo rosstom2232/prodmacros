@@ -1,13 +1,13 @@
 #______________________________________________________________________________________________________________________
-PROD_STREAMING_EVENT_run3oo:
+pro001_STREAMING_EVENT_run3oo:
   params:
     dsttype:    DST_STREAMING_EVENT
     period:     run3oo
     physicsmode: physics
     dataset:    run3oo
-    build:      PROD
-    dbtag:      TAG
-    version:    VERSION
+    build:      pro001
+    dbtag:      pcdb001
+    version:    1
 
   input:
     db:          rawr
@@ -31,20 +31,20 @@ PROD_STREAMING_EVENT_run3oo:
       condor:            "/tmp/data02/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
 
 #______________________________________________________________________________________________________________________
-PROD_TRKR_CLUSTER_run3oo:
+pro001_TRKR_CLUSTER_run3oo:
   params:
     dsttype:     DST_TRKR_CLUSTER
     period:      run3oo
     physicsmode: physics
     dataset:     run3oo
-    build:       PROD
-    dbtag:       TAG
-    version:     VERSION
+    build:       pro001
+    dbtag:       pcdb001
+    version:     1
 
   input:
     db:          fcr
     table:       datasets
-    intriplet:   PROD_TAG_VERSION
+    intriplet:   pro001_pcdb001_v001
     # cut_segment: 10
   job:
     script:                 run_rolloverjob0.sh
@@ -55,21 +55,25 @@ PROD_TRKR_CLUSTER_run3oo:
     request_cpus:          '1'
     batch_name:            '{rule_name}_{dataset}_{outtriplet}'
     priority:              '60'
+    filesystem:
+      logdir:   "/sphenix/data/data02/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
+      histdir:  "/sphenix/data/data02/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/hist"
+      condor:            "/tmp/data02/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
 
 #______________________________________________________________________________________________________________________
-PROD_TRKR_SEED_run3oo:
+pro001_TRKR_SEED_run3oo:
   params:
     dsttype:     DST_TRKR_SEED
     period:      run3oo
     physicsmode: physics
     dataset:     run3oo
-    build:       PROD
-    dbtag:       TAG
-    version:     VERSION
+    build:       pro001
+    dbtag:       pcdb001
+    version:     1
   input:
     db:          fcr
     table:       datasets
-    intriplet:   PROD_TAG_VERSION
+    intriplet:   pro001_pcdb001_v001
     # cut_segment: 10
 
   job:
@@ -81,21 +85,25 @@ PROD_TRKR_SEED_run3oo:
     request_cpus:          '2'
     batch_name:            '{rule_name}_{dataset}_{outtriplet}'
     priority:              '30'
+    filesystem:
+      logdir:   "/sphenix/data/data02/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
+      histdir:  "/sphenix/data/data02/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/hist"
+      condor:            "/tmp/data02/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
 
 #______________________________________________________________________________________________________________________
-PROD_TRKR_TRACKS_run3oo:
+pro001_TRKR_TRACKS_run3oo:
   params:
     dsttype:     DST_TRKR_TRACKS
     period:      run3oo
     physicsmode: physics
     dataset:     run3oo
-    build:       PROD
-    dbtag:       TAG
-    version:     VERSION
+    build:       pro001
+    dbtag:       pcdb001
+    version:     1
   input:
     db:          fcr
     table:       datasets
-    intriplet:   PROD_TAG_VERSION
+    intriplet:   pro001_pcdb001_v001
     # cut_segment: 10
 
   job:
@@ -107,3 +115,7 @@ PROD_TRKR_TRACKS_run3oo:
     request_cpus:          '2'
     batch_name:            '{rule_name}_{dataset}_{outtriplet}'
     priority:              '30'
+    filesystem:
+      logdir:   "/sphenix/data/data02/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
+      histdir:  "/sphenix/data/data02/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/hist"
+      condor:            "/tmp/data02/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"

@@ -1,0 +1,50 @@
+
+################################# Prod01 #######################################
+### Standard full production 
+sphnxprod01:
+  defaultlocations:
+    submitdir:  /sphenix/data/data02/sphnxpro/production/run3oo/submission/{rule}
+    prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
+    configbase: /sphenix/u/sphnxpro/Production2026/run3oo_tracking_pro001_pcdb001_v001/dir_run3oo_tracking_pro001_pcdb001_v001/rules
+
+  # STREAMING physics
+  pro001_STREAMING_EVENT_run3oo:
+    config: run3oo_tracking_physics_pro001_pcdb001_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run3oo_tracking_pro001_pcdb001_v001/dir_run3oo_tracking_pro001_pcdb001_v001/runlist
+    #runs: [82372 82703]
+    jobprio: 90
+    submit: on
+    dstspider: on
+    finishmon: on
+
+  # TRKR_CLUSTER physics
+  pro001_TRKR_CLUSTER_run3oo:
+    config: run3oo_tracking_physics_pro001_pcdb001_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run3oo_tracking_pro001_pcdb001_v001/dir_run3oo_tracking_pro001_pcdb001_v001/runlist
+    #runs: [82372 82703]
+    jobprio: 60
+    submit: on
+    dstspider: on
+    finishmon: on
+
+  # TRKR_SEED physics
+  pro001_TRKR_SEED_run3oo:
+    config: run3oo_tracking_physics_pro001_pcdb001_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run3oo_tracking_pro001_pcdb001_v001/dir_run3oo_tracking_pro001_pcdb001_v001/runlist
+    #runs: [82372 82703]
+    jobprio: 30
+    submit: on
+    dstspider: on
+    finishmon: on
+
+  # TRKR_TRACKS physics
+  pro001_TRKR_TRACKS_run3oo:
+    config: run3oo_tracking_physics_pro001_pcdb001_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run3oo_tracking_pro001_pcdb001_v001/dir_run3oo_tracking_pro001_pcdb001_v001/runlist
+    #runs: [82372 82703]
+    jobprio: 10
+    submit: on
+    dstspider: on
+    finishmon: on
+
+###############################################################################
