@@ -118,27 +118,26 @@ Critical fields to adapt are `build`, `dbtag`, and version, which then need to p
 #__________________________________________________________________________________
 pro001_STREAMING_EVENT_run3oo:
   params:
-    dsttype:      DST_STREAMING_EVENT
-    build:        pro001
-    dbtag:        pcdb001
-    version:      1
-    period:       run3oo
-    dataset:      run3oo
-    physicsmode:  physics
-
+    dsttype:    DST_STREAMING_EVENT
+    period:     run3oo
+    physicsmode: physics
+    dataset:    run3oo
+    build:      pro001
+    dbtag:      pcdb001
+    version:    1
 
 [...]
 #__________________________________________________________________________________
 pro001_TRKR_CLUSTER_run3oo:
   params:
-    dsttype:      DST_TRKR_CLUSTER
-    build:        pro001
-    dbtag:        pcdb001
-    version:      1
-    period:       run3oo
-    dataset:      run3oo
-    physicsmode:  physics
-
+    dsttype:     DST_TRKR_CLUSTER
+    period:      run3oo
+    physicsmode: physics
+    dataset:     run3oo
+    build:       pro001
+    dbtag:       pcdb001
+    version:     1
+  
   input:
     intriplet:   pro001_pcdb001_v001   # This is the output triplet of the previous rule!
 
@@ -146,13 +145,13 @@ pro001_TRKR_CLUSTER_run3oo:
 #__________________________________________________________________________________
 pro001_TRKR_SEED_run3oo:
   params:
-    dsttype:      DST_TRKR_SEED
-    build:        pro001
-    dbtag:        pcdb001
-    version:      1
-    period:       run3oo
-    dataset:      run3oo
-    physicsmode:  physics
+    dsttype:     DST_TRKR_SEED
+    period:      run3oo
+    physicsmode: physics
+    dataset:     run3oo
+    build:       pro001
+    dbtag:       pcdb001
+    version:     1
 
   input:
     intriplet:   pro001_pcdb001_v001   # This is the output triplet of the previous rule!
@@ -161,13 +160,13 @@ pro001_TRKR_SEED_run3oo:
 #__________________________________________________________________________________
 pro001_TRKR_TRACKS_run3oo:
   params:
-    dsttype:      DST_TRKR_TRACKS
-    build:        pro001
-    dbtag:        pcdb001
-    version:      1
-    period:       run3oo
-    dataset:      run3oo
-    physicsmode:  physics
+    dsttype:     DST_TRKR_TRACKS
+    period:      run3oo
+    physicsmode: physics
+    dataset:     run3oo
+    build:       pro001
+    dbtag:       pcdb001
+    version:     1
 
   input:
     intriplet:   pro001_pcdb001_v001   # This is the output triplet of the previous rule!
@@ -178,10 +177,10 @@ pro001_TRKR_TRACKS_run3oo:
 Note that `build`, `tag`, and `version` of the two steps don't need to be the same, the connection is made via the `intriplet`. However, if they do differ, please name the base directories, branch, git tag, etc. wisely.
 
 
-<!-- # filesystem: # redirect log while data03 is full
+<!-- # filesystem: # redirect log while data02 is full
 #   outdir:      "/sphenix/lustre01/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}"
 #   finaldir:    "/sphenix/lustre01/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}"
-#   logdir:     "/sphenix/sim/sim02/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
+#   logdir:     "/sphenix/data/data02/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
 #   histdir:  "/sphenix/data/data02/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/hist"
 #   condor:       "/tmp/sphenixprod/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log" -->
 
@@ -209,9 +208,9 @@ The file needs a top node for any submission host you'd want to run this product
 ```yaml
 sphnxprod01:
   defaultlocations:
+    submitdir:  /sphenix/data/data02/sphnxpro/production/run3oo/submission/{rule}
     prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
     configbase: /sphenix/u/sphnxpro/Production2026/run3oo_tracking_pro001_pcdb001_v001/dir_run3oo_tracking_pro001_pcdb001_v001/rules
-    submitdir:  /sphenix/data/data03/sphnxpro/production/run3oo/submission/{rule}
 ```
 Most important here is to change `configbase`. Note that the production submission installation at `prodbase` can also be individualized. `submitdir` is a location for helper caches, so make sure it's not in danger of being full.
 
@@ -301,20 +300,20 @@ git push --follow-tags
 ### Contents of `rules/run3oo_trackinging_physics_pro001_pcdb001_v001.yaml`
 
 ```yaml
-#______________________________________________________________________________
+#______________________________________________________________________________________________________________________
 pro001_STREAMING_EVENT_run3oo:
   params:
-    dsttype:      DST_STREAMING_EVENT
-    build:        pro.001
-    dbtag:        pcdb001
-    version:      1
-    period:       run3oo
-    dataset:      run3oo
-    physicsmode:  physics
+    dsttype:    DST_STREAMING_EVENT
+    period:     run3oo
+    physicsmode: physics
+    dataset:    run3oo
+    build:      pro001
+    dbtag:      pcdb001
+    version:    1
 
   input:
-    db:             rawr
-    table:          datasets
+    db:          rawr
+    table:       datasets
     min_run_time:   300
     min_run_events: 100000
     combine_seg0_only: false
@@ -324,91 +323,92 @@ pro001_STREAMING_EVENT_run3oo:
     log:                   '{condor}/{logbase}.condor'
     neventsper:             10000
     payload:                [../streaming_code/*]
-    request_memory:         3072 MB
-    request_xferslots:     '3'    
+    request_memory:         3072 MB, 5072 MB, 7072 MB
+    request_xferslots:     '3'
     batch_name:            '{rule_name}_{dataset}_{outtriplet}'
     priority:              '90'
+    filesystem:
+      logdir:   "/sphenix/data/data02/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
+      histdir:  "/sphenix/data/data02/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/hist"
+      condor:            "/tmp/data02/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
 
-#______________________________________________________________________________
+#______________________________________________________________________________________________________________________
 pro001_TRKR_CLUSTER_run3oo:
   params:
-    dsttype:      DST_TRKR_CLUSTER
-    build:        pro.001
-    dbtag:        pcdb001
-    version:      1
-    period:       run3oo
-    dataset:      run3oo
-    physicsmode:  physics
+    dsttype:     DST_TRKR_CLUSTER
+    period:      run3oo
+    physicsmode: physics
+    dataset:     run3oo
+    build:       pro001
+    dbtag:       pcdb001
+    version:     1
 
   input:
-    db:           fcr
-    table:        datasets
-    intriplet:    pro001_pcdb001_v001  # This is the output triplet of the previous rule
-
+    db:          fcr
+    table:       datasets
+    intriplet:   pro001_pcdb001_v001
+    # cut_segment: 10
   job:
     script:                 run_rolloverjob0.sh
     log:                   '{condor}/{logbase}.condor'
     neventsper:             1000
     payload:                [../tracking_code/*]
-    request_memory:         8192MB
+    request_memory:         8192 MB, 12092 MB, 16092 MB
     request_cpus:          '1'
     batch_name:            '{rule_name}_{dataset}_{outtriplet}'
     priority:              '60'
 
-#______________________________________________________________________________
+#______________________________________________________________________________________________________________________
 pro001_TRKR_SEED_run3oo:
   params:
-    dsttype:      DST_TRKR_SEED
-    build:        pro.001
-    dbtag:        pcdb001
-    version:      1
-    period:       run3oo
-    dataset:      run3oo
-    physicsmode:  physics
-
+    dsttype:     DST_TRKR_SEED
+    period:      run3oo
+    physicsmode: physics
+    dataset:     run3oo
+    build:       pro001
+    dbtag:       pcdb001
+    version:     1
   input:
-    db:           fcr
-    table:        datasets
-    intriplet:    pro001_pcdb001_v001  # This is the output triplet of the previous rule
+    db:          fcr
+    table:       datasets
+    intriplet:   pro001_pcdb001_v001
+    # cut_segment: 10
 
   job:
     script:                 run_jobA.sh
     log:                   '{condor}/{logbase}.condor'
     neventsper:             1000
     payload:                [../tracking_code/*]
-    request_memory:         8192MB
-    request_cpus:          '1'
+    request_memory:         4096 MB, 6096 MB, 8096 MB
+    request_cpus:          '2'
     batch_name:            '{rule_name}_{dataset}_{outtriplet}'
-    priority:              '60'
+    priority:              '30'
 
-#______________________________________________________________________________
+#______________________________________________________________________________________________________________________
 pro001_TRKR_TRACKS_run3oo:
   params:
-    dsttype:      DST_TRKR_TRACKS
-    build:        pro.001
-    dbtag:        pcdb001
-    version:      1
-    period:       run3oo
-    dataset:      run3oo
-    physicsmode:  physics
-
+    dsttype:     DST_TRKR_TRACKS
+    period:      run3oo
+    physicsmode: physics
+    dataset:     run3oo
+    build:       pro001
+    dbtag:       pcdb001
+    version:     1
   input:
-    db:           fcr
-    table:        datasets
-    intriplet:    pro001_pcdb001_v001  # This is the output triplet of the previous rule
+    db:          fcr
+    table:       datasets
+    intriplet:   pro001_pcdb001_v001
+    # cut_segment: 10
 
   job:
     script:                 run_jobC.sh
     log:                   '{condor}/{logbase}.condor'
     neventsper:             1000
     payload:                [../tracking_code/*]
-    request_memory:         8192MB
-    request_cpus:          '1'
+    request_memory:         4096 MB, 6096 MB, 8096 MB
+    request_cpus:          '2'
     batch_name:            '{rule_name}_{dataset}_{outtriplet}'
-    priority:              '60'
-
-###############################################################################
-
+    priority:              '30'
 ```
 
 ### Contents of `pilots/autopilot_run3oo_tracking_physics_pro001_pcdb001_v001.yaml`
@@ -418,46 +418,50 @@ pro001_TRKR_TRACKS_run3oo:
 ### Standard full production 
 sphnxprod01:
   defaultlocations:
-    prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
-    configbase: /sphenix/u/sphnxpro/Production2026/run3oo_tracking_pro001_pcdb001_v001/dir_run3oo_tracking_pro001_pcdb001_v001/rules
     submitdir:  /sphenix/data/data02/sphnxpro/production/run3oo/submission/{rule}
+    prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
+    configbase: /sphenix/u/sphnxpro/Production2026/BRANCH/dir_BRANCH
 
-  # Event combining
+  # STREAMING physics
   pro001_STREAMING_EVENT_run3oo:
-    config: run3oo_streaming_physics_pro001_pcdb001_v001.yaml
-    runlist: /sphenix/u/sphnxpro/Production2026/run3oo_tracking_pro001_pcdb001_v001/dir_run3oo_tracking_pro001_pcdb001_v001/runlist_run3oo_tracking_pro001
-    # runs: [82374 82703]
+    config: run3oo_tracking_physics_pro001_pcdb001_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run3oo_tracking_pro001_pcdb001_v001/dir_run3oo_tracking_pro001_pcdb001_v001/runlist
+    #runs: [82372 82703]
     jobprio: 90
     submit: on
     dstspider: on
     finishmon: on
 
-  # Clustering
+  # TRKR_CLUSTER physics
   pro001_TRKR_CLUSTER_run3oo:
     config: run3oo_tracking_physics_pro001_pcdb001_v001.yaml
-    runlist: /sphenix/u/sphnxpro/Production2026/run3oo_tracking_pro001_pcdb001_v001/dir_run3oo_tracking_pro001_pcdb001_v001/runlist_run3oo_tracking_pro001
+    runlist: /sphenix/u/sphnxpro/Production2026/run3oo_tracking_pro001_pcdb001_v001/dir_run3oo_tracking_pro001_pcdb001_v001/runlist
+    #runs: [82372 82703]
     jobprio: 60
     submit: on
     dstspider: on
     finishmon: on
-
-  # Seeding
+  
+  # TRKR_SEED physics
   pro001_TRKR_SEED_run3oo:
     config: run3oo_tracking_physics_pro001_pcdb001_v001.yaml
-    runlist: /sphenix/u/sphnxpro/Production2026/run3oo_tracking_pro001_pcdb001_v001/dir_run3oo_tracking_pro001_pcdb001_v001/runlist_run3oo_tracking_pro001
+    runlist: /sphenix/u/sphnxpro/Production2026/run3oo_tracking_pro001_pcdb001_v001/dir_run3oo_tracking_pro001_pcdb001_v001/runlist
+    #runs: [82372 82703]
     jobprio: 30
     submit: on
     dstspider: on
     finishmon: on
-  
-  # Clustering
+
+  # TRKR_TRACKS physics
   pro001_TRKR_TRACKS_run3oo:
     config: run3oo_tracking_physics_pro001_pcdb001_v001.yaml
-    runlist: /sphenix/u/sphnxpro/Production2026/run3oo_tracking_pro001_pcdb001_v001/dir_run3oo_tracking_pro001_pcdb001_v001/runlist_run3oo_tracking_pro001
+    runlist: /sphenix/u/sphnxpro/Production2026/run3oo_tracking_pro001_pcdb001_v001/dir_run3oo_tracking_pro001_pcdb001_v001/runlist
+    #runs: [82372 82703]
     jobprio: 10
     submit: on
     dstspider: on
     finishmon: on
+
 ###############################################################################
 ```
 

@@ -1,5 +1,5 @@
 #______________________________________________________________________________________________________________________
-Full_STREAMING_EVENT_run3oo:
+PROD_STREAMING_EVENT_run3oo:
   params:
     dsttype:    DST_STREAMING_EVENT
     period:     run3oo
@@ -31,7 +31,7 @@ Full_STREAMING_EVENT_run3oo:
       condor:            "/tmp/data02/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
 
 #______________________________________________________________________________________________________________________
-Full_TRKR_CLUSTER_run3oo:
+PROD_TRKR_CLUSTER_run3oo:
   params:
     dsttype:     DST_TRKR_CLUSTER
     period:      run3oo
@@ -57,7 +57,7 @@ Full_TRKR_CLUSTER_run3oo:
     priority:              '60'
 
 #______________________________________________________________________________________________________________________
-Full_TRKR_SEED_run3oo:
+PROD_TRKR_SEED_run3oo:
   params:
     dsttype:     DST_TRKR_SEED
     period:      run3oo
@@ -83,7 +83,7 @@ Full_TRKR_SEED_run3oo:
     priority:              '30'
 
 #______________________________________________________________________________________________________________________
-Full_TRKR_TRACKS_run3oo:
+PROD_TRKR_TRACKS_run3oo:
   params:
     dsttype:     DST_TRKR_TRACKS
     period:      run3oo
