@@ -1,10 +1,8 @@
 # This file lists the active production steering files for the master cron job.
 # One full path per line. Lines starting with # are ignored.
 /sphenix/u/sphnxpro/Production2026/run3oo_calo_pro001_pcdb001_v001/dir_run3oo_calo_pro001_pcdb001_v001/pilots/autopilot_run3oo_calo_physics_pro001_pcdb001_v001.yaml
-
+/sphenix/u/sphnxpro/Production2026/run3oo_tracking_pro001_newcdbtag_v001/dir_run3oo_tracking_pro001_newcdbtag_v001/pilots/autopilot_run3oo_tracking_physics_pro001_newcdbtag_v001.yaml
+## Testing:
+/sphenix/u/sphnxpro/devkolja/ProdFlow/short/run3pp/devkolja_run3pp_production.yaml
+/sphenix/u/sphnxpro/Production2026/cosmics_calo_pro001_pcdb001_v001/cosmics/pilots/autopilot_cosmics_calo_cosmics_pro001_pcdb001_v001.yaml
 ## Older, deprecated:
-/sphenix/u/sphnxpro/mainkolja/ProdFlow/short/run3auau/run3auau_production.yaml
-/sphenix/u/sphnxpro/mainkolja/ProdFlow/short/run3pp/run3pp_production.yaml
-/sphenix/u/sphnxpro/mainkolja/ProdFlow/short/run3oo/run3oo_production.yaml
-/sphenix/u/sphnxpro/mainkolja/ProdFlow/short/run2pp/run2pp_production.yaml
-/sphenix/u/sphnxpro/mainkolja/ProdFlow/short/run3cosmics/run3cosmics_production.yaml
