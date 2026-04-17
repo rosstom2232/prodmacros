@@ -5,7 +5,6 @@
 /sphenix/u/sphnxpro/Production2026/run3laser_tracking_ana543_pcdb002_v001/dir_run3laser_tracking_ana543_pcdb002_v001/pilots/autopilot_run3laser_tracking_physics_ana543_pcdb002_v001.yaml
 /sphenix/u/sphnxpro/Production2026/run3pp_tracking_ana545_pcdb002_v001/dir_run3pp_tracking_ana545_pcdb002_v001/pilots/autopilot_run3pp_tracking_physics_ana545_pcdb002_v001.yaml
 ## Testing:
-/sphenix/u/sphnxpro/devkolja/ProdFlow/short/run3pp/devkolja_run3pp_production.yaml
+/sphenix/u/sphnxpro/Production2026/prodmacros/testing3pp/pilots/autopilot_testing3pp_v666.yaml
 /sphenix/u/sphnxpro/Production2026/cosmics_calo_pro001_pcdb001_v001/cosmics/pilots/autopilot_cosmics_calo_cosmics_pro001_pcdb001_v001.yaml
 /sphenix/u/sphnxpro/Production2026/run3auau_calo_pro001_pcdb001_v001/dir_run3auau_calo_pro001_pcdb001_v001/pilots/autopilot_run3auau_calo_physics_pro001_pcdb001_v001.yaml
-## Older, deprecated:
